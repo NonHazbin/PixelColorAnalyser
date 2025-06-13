@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np
 import csv
+import os
 
 
 def is_white_grid(pixel, threshold=250):
@@ -47,12 +48,16 @@ def find_grid_line(image_np):
 
 def export_csv(csv_filename_, rgb_matrix_):
     """csvへ出力"""
-    with open(csv_filename_, mode = "w", newline = "") as file:
+    # CSVsフォルダがない場合は作成
+    os.makedirs("CSVs", exist_ok=True)
+    output_path = os.path.join("CSVs", csv_filename_)
+
+    with open(output_path, mode = "w", newline = "") as file:
         writer = csv.writer(file)
         for i in rgb_matrix_:
             formatted_row = [f"({r},{g},{b})" for r, g, b in i]
             writer.writerow(formatted_row)
-    print(f"\n出力完了: {csv_filename_}")
+    print(f"\n出力完了: {output_path}")
 
 def main(image_path, csv_filename_):
     """画像からグリッドの位置およびセル内のRGB情報を抽出してデバッグする。"""
