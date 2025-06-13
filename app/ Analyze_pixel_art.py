@@ -1,5 +1,6 @@
 from PIL import Image
 import numpy as np
+import csv
 
 
 def is_white_grid(pixel, threshold=250):
@@ -44,8 +45,16 @@ def find_grid_line(image_np):
 
     return vertical_lines, horizontal_lines
 
+def export_csv(csv_filename_, rgb_matrix_):
+    """csvへ出力"""
+    with open(csv_filename_, mode = "w", newline = "") as file:
+        writer = csv.writer(file)
+        for i in rgb_matrix_:
+            formatted_row = [f"({r},{g},{b})" for r, g, b in i]
+            writer.writerow(formatted_row)
+    print(f"\n出力完了: {csv_filename_}")
 
-def main(image_path):
+def main(image_path, csv_filename_):
     """画像からグリッドの位置およびセル内のRGB情報を抽出してデバッグする。"""
     # 画像読み込み
     img = Image.open(image_path).convert("RGB")
@@ -53,17 +62,18 @@ def main(image_path):
 
     # グリッド線の検出
     vertical_lines, horizontal_lines = find_grid_line(image_np)
-    print("検出された縦線 :", vertical_lines)
-    print("検出された横線 :", horizontal_lines)
+    #print("検出された縦線 :", vertical_lines)
+    #print("検出された横線 :", horizontal_lines)
 
     # RGB値の抽出
     rgb_matrix = extract_cells_rgb(image_np, vertical_lines, horizontal_lines)
 
     # デバッグ
-    for i, row in enumerate(rgb_matrix):
-        for j, rgb in enumerate(row):
-            print(f"Cell ({i}, {j}): RGB = {rgb}")
+    #for i, row in enumerate(rgb_matrix):
+    #    for j, rgb in enumerate(row):
+    #       print(f"Cell ({i}, {j}): RGB = {rgb}")
 
+    export_csv(csv_filename_, rgb_matrix)
 
 if __name__ == "__main__":
     # 画像パスも整理して指定して下さい
