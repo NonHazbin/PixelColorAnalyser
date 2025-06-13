@@ -57,7 +57,7 @@ def export_csv(csv_filename_, rgb_matrix_):
 def main(image_path, csv_filename_):
     """画像からグリッドの位置およびセル内のRGB情報を抽出してデバッグする。"""
     # 画像読み込み
-    img = Image.open(image_path).convert("RGB")
+    img = Image.open(f"Image/{image_path}").convert("RGB")
     image_np = np.array(img)
 
     # グリッド線の検出
@@ -77,4 +77,4 @@ def main(image_path, csv_filename_):
 
 if __name__ == "__main__":
     # 画像パスも整理して指定して下さい
-    main("Image/sample_grid.tiff", "cell_rgb_matrix.csv")
+    main("sample_grid.tiff", "cell_rgb_matrix.csv")
