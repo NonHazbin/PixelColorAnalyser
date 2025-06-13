@@ -1,5 +1,6 @@
 from PIL import Image
 import csv
+import os
 
 def read_rgb_csv(csv_path_):
     """CSVファイルからRGBを読み取る"""
@@ -29,12 +30,18 @@ def rgb_data_to_image(rgb_data_, pixel_size_=10):
     return img
 
 
-def main(csv_path_, output_image_path_, pixel_size_):
-    rgb_data = read_rgb_csv(f"CSVs/{csv_path_}")
-    img = rgb_data_to_image(rgb_data, pixel_size_)
-    img.save(output_image_path_)
+def main(csv_path_, output_dir_, input_file_image_, pixel_size_):
+    input_path = os.path.join("CSVs", csv_path_)
 
-    print(f"生成完了:{output_image_path_}")
+    #output_dir_がない場合に作成
+    os.makedirs(output_dir_, exist_ok = True)
+    output_path = os.path.join(output_dir_, input_file_image_)
+
+    rgb_data = read_rgb_csv(input_path)
+    img = rgb_data_to_image(rgb_data, pixel_size_)
+    img.save(output_path)
+
+    print(f"生成完了:{output_path}")
 
 if __name__ == "__main__":
-    main("cell_rgb_matrix.csv", "pxcel_art.png", 20)
+    main("cell_rgb_matrix.csv", "Image","pxcel_art.png", 20)
