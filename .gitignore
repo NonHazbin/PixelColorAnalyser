@@ -194,6 +194,6 @@ cython_debug/
 .cursorindexingignore
 
 env/*
-.csv
-.tiff
-.png
+*.csv
+*.tiff
+*.png
