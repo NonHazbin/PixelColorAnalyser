@@ -197,3 +197,4 @@ env/*
 *.csv
 *.tiff
 *.png
+*.txt
