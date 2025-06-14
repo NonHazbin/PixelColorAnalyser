@@ -82,4 +82,4 @@ def main(image_path, csv_filename_):
 
 if __name__ == "__main__":
     # 画像パスも整理して指定して下さい
-    main("sample_grid.tiff", "cell_rgb_matrix.csv")
+    main("sample_grid.tiff", "cell_rgb_mx.csv")

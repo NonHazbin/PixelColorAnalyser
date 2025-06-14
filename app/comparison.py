@@ -43,10 +43,10 @@ def output_difference(differences_, output_txt_):
 
 
 def main(file1_, file2_, output_txt_):
-    differences = compare_csv(f"CSVs_{file1_}" , f"CSVs_{file2_}")
+    differences = compare_csv(f"CSVs/{file1_}" , f"CSVs/{file2_}")
 
-    output_difference(differences, output_txt_= "output_txt.txt")
+    output_difference(differences, output_txt_)
 
 
 if __name__ == "__main__":
-    main("a.csv", "b.csv")
+    main("a.csv", "b.csv", "output_txt.txt")
